@@ -6,7 +6,6 @@
 using namespace std;
 
 enum FUNCTION {
-	DEFUALT = 0,
 	ADD_BOOK = 1,
 	FIND_TITLE,
 	FIND_AUTHOR,
@@ -60,7 +59,6 @@ void SettingLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 
 void OperationLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 	
-	FUNCTION function = DEFUALT;
 	int inputNum = 0;
 	bool isOperation = true;
 	string title = "";
