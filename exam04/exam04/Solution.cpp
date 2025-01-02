@@ -1,40 +1,53 @@
-#include "Book.h"
+ï»¿#include "Book.h"
 #include "BookManager.h"
 #include "BorrowManager.h"
 #include <iostream>
 #include <map>
 using namespace std;
 
+enum FUNCTION {
+	DEFUALT = 0,
+	ADD_BOOK = 1,
+	FIND_TITLE,
+	FIND_AUTHOR,
+	DISPLAY_ALL_BOOK_INFO,
+	BORROW_BOOK,
+	RETURN_BOOK,
+	DISPLAY_ALL_BORROW_INFO,
+	SYSTEM_EXIT,
+};
+
 map<string, string> bookList;
 void InitializeBooks() {
-	bookList["¼Õ»çÀå ÀÌ¾ß±â"] = "¼Õ»çÀå";
-	bookList["¼Õ¸®Æ÷ÅÍ"] = "¼Õ»çÀå";
-	bookList["À§´ëÇÑ ¼Õ»çÀå"] = "¼Õ»çÀå";
-	bookList["Áø°İÀÇ ¾ğ¸®¾ó"] = "¾ğ¸®¾ó";
-	bookList["Å°º¸µå ¿¬±¸¼Ò"] = "Å°º¸µå¹Ú»ç";
+	bookList["ì†ì‚¬ì¥ ì´ì•¼ê¸°"] = "ì†ì‚¬ì¥";
+	bookList["ì†ë¦¬í¬í„°"] = "ì†ì‚¬ì¥";
+	bookList["ìœ„ëŒ€í•œ ì†ì‚¬ì¥"] = "ì†ì‚¬ì¥";
+	bookList["ì§„ê²©ì˜ ì–¸ë¦¬ì–¼"] = "ì–¸ë¦¬ì–¼";
+	bookList["í‚¤ë³´ë“œ ì—°êµ¬ì†Œ"] = "í‚¤ë³´ë“œë°•ì‚¬";
 }
 
 void PrintTitle() {
 	cout << "---------------------------------------------" << endl;
-	cout << "<--µµ¼­°ü ÇÁ·Î±×·¥ °¡µ¿!-->" << endl;
+	cout << "<--ë„ì„œê´€ í”„ë¡œê·¸ë¨ ê°€ë™!-->" << endl;
 	cout << "---------------------------------------------" << endl;
 }
 
 void PrintLibraryFunction() {
 	cout << "---------------------------------------------" << endl;
-	cout << "µµ¼­°üÀ» ÀÌ¿ëÇÕ´Ï´Ù. ¿øÇÏ½Ã´Â ±â´ÉÀ» ÀÔ·ÂÇÏ¼¼¿ä." << endl;
-	cout << "1. Ã¥ Ãß°¡ÇÏ±â" << endl;
-	cout << "2. Á¦¸ñÀ¸·Î °Ë»öÇÏ±â" << endl;
-	cout << "3. ÀÛ°¡ ÀÌ¸§À¸·Î °Ë»öÇÏ±â" << endl;
-	cout << "4. µµ¼­°ü¿¡ ÀÖ´Â ¸ğµç Ã¥ º¸±â" << endl;
-	cout << "5. Ã¥ ºô¸®±â" << endl;
-	cout << "6. Ã¥ ¹İ³³ÇÏ±â" << endl;
-	cout << "7. ´ë¿© °¡´ÉÇÑ ¸ğµç Ã¥ º¸±â" << endl;
-	cout << "8. µµ¼­ ½Ã½ºÅÛ Á¾·á" << endl;
+	cout << "ë„ì„œê´€ì„ ì´ìš©í•©ë‹ˆë‹¤. ì›í•˜ì‹œëŠ” ê¸°ëŠ¥ì„ ì…ë ¥í•˜ì„¸ìš”." << endl;
+	cout << "1. ì±… ì¶”ê°€í•˜ê¸°" << endl;
+	cout << "2. ì œëª©ìœ¼ë¡œ ê²€ìƒ‰í•˜ê¸°" << endl;
+	cout << "3. ì‘ê°€ ì´ë¦„ìœ¼ë¡œ ê²€ìƒ‰í•˜ê¸°" << endl;
+	cout << "4. ë„ì„œê´€ì— ìˆëŠ” ëª¨ë“  ì±… ë³´ê¸°" << endl;
+	cout << "5. ì±… ë¹Œë¦¬ê¸°" << endl;
+	cout << "6. ì±… ë°˜ë‚©í•˜ê¸°" << endl;
+	cout << "7. ëŒ€ì—¬ ê°€ëŠ¥í•œ ëª¨ë“  ì±… ë³´ê¸°" << endl;
+	cout << "8. ë„ì„œê´€ ì‹œìŠ¤í…œ ì¢…ë£Œ" << endl;
+	cout << "---------------------------------------------" << endl;
 }
 
 void SettingLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
-	cout << "µµ¼­°ü¿¡ Ã¥À» Ãß°¡ÇÕ´Ï´Ù." << endl;
+	cout << "ë„ì„œê´€ì— ì±…ì„ ì¶”ê°€í•©ë‹ˆë‹¤." << endl;
 
 	for (auto it : bookList) {
 		Book newBook = Book(it.first, it.second);
@@ -42,12 +55,13 @@ void SettingLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 		borrowManager.InitializeStock(newBook);
 	}
 
-	cout << "5±ÇÀÇ Ã¥ÀÌ Á¤»óÀûÀ¸·Î Ãß°¡µÇ¾ú½À´Ï´Ù." << endl;
+	cout << "5ê¶Œì˜ ì±…ì´ ì •ìƒì ìœ¼ë¡œ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 }
 
 void OperationLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 	
-	int num = 0;
+	FUNCTION function = DEFUALT;
+	int inputNum = 0;
 	bool isOperation = true;
 	string title = "";
 	string author = "";
@@ -55,65 +69,57 @@ void OperationLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 		title = "";
 		author = "";
 		PrintLibraryFunction();
-		cin >> num;
-		switch (num)
+		cin >> inputNum;
+		switch ((FUNCTION)inputNum)
 		{
-		case 1: {
-			cout << "---------------------------------------------" << endl;
-			cout << "1. Ã¥ Ãß°¡ÇÏ±â(Á¦¸ñ°ú ÀÛ°¡¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä)" << endl;
+		case ADD_BOOK: {
+			cout << "1. ì±… ì¶”ê°€í•˜ê¸°(ì œëª©ê³¼ ì‘ê°€ëª…ì„ ì…ë ¥í•˜ì„¸ìš”)" << endl;
 			cin >> title >> author;
 			Book newBook = Book(title, author);
 			bookManager.AddBook(newBook);
 			break;
 		}
-		case 2: {
-			cout << "---------------------------------------------" << endl;
-			cout << "2. Á¦¸ñÀ¸·Î °Ë»öÇÏ±â(Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä)" << endl;
+		case FIND_TITLE: {
+			cout << "2. ì œëª©ìœ¼ë¡œ ê²€ìƒ‰í•˜ê¸°(ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”)" << endl;
 			cin >> title;
 			bookManager.FindBookByTitle(title);
 			break;
 		}
-		case 3: {
-			cout << "---------------------------------------------" << endl;
-			cout << "3. ÀÛ°¡ ÀÌ¸§À¸·Î °Ë»öÇÏ±â(ÀÛ°¡¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä)" << endl;
+		case FIND_AUTHOR: {
+			cout << "3. ì‘ê°€ ì´ë¦„ìœ¼ë¡œ ê²€ìƒ‰í•˜ê¸°(ì‘ê°€ëª…ì„ ì…ë ¥í•˜ì„¸ìš”)" << endl;
 			cin >> author;
 			bookManager.FindBookByAuthor(author);
 			break;
 		}
-		case 4: {
-			cout << "---------------------------------------------" << endl;
-			cout << "4. µµ¼­°ü¿¡ ÀÖ´Â ¸ğµç Ã¥ º¸±â" << endl;
+		case DISPLAY_ALL_BOOK_INFO: {
+			cout << "4. ë„ì„œê´€ì— ìˆëŠ” ëª¨ë“  ì±… ë³´ê¸°" << endl;
 			bookManager.DisplayAllBooks();
 			break;
 		}
-		case 5: {
-			cout << "---------------------------------------------" << endl;
-			cout << "5. Ã¥ ºô¸®±â(Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä)" << endl;
+		case BORROW_BOOK: {
+			cout << "5. ì±… ë¹Œë¦¬ê¸°(ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”)" << endl;
 			cin >> title;
 			borrowManager.BorrowBook(title);
 			break;
 		}
-		case 6: {
-			cout << "---------------------------------------------" << endl;
-			cout << "6. Ã¥ ¹İ³³ÇÏ±â(Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä)" << endl;
+		case RETURN_BOOK: {
+			cout << "6. ì±… ë°˜ë‚©í•˜ê¸°(ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”)" << endl;
 			cin >> title;
 			borrowManager.ReturnBook(title);
 			break;
 		}
-		case 7: {
-			cout << "---------------------------------------------" << endl;
-			cout << "7. ´ë¿© °¡´ÉÇÑ ¸ğµç Ã¥ º¸±â" << endl;
+		case DISPLAY_ALL_BORROW_INFO: {
+			cout << "7. ëŒ€ì—¬ ê°€ëŠ¥í•œ ëª¨ë“  ì±… ë³´ê¸°" << endl;
 			borrowManager.DisplayStock();
 			break;
 		}
-		case 8: {
-			cout << "µµ¼­°ü ½Ã½ºÅÛÀ» Á¾·áÇÕ´Ï´Ù." << endl;
-			cout << "---------------------------------------------" << endl;
+		case SYSTEM_EXIT: {
+			cout << "ë„ì„œê´€ ì‹œìŠ¤í…œì„ ì¢…ë£Œí•©ë‹ˆë‹¤." << endl;
 			isOperation = false;
 			break;
 		}
 		default:
-			cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù." << endl;
+			cout << "ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤." << endl;
 			break;
 		}
 	}

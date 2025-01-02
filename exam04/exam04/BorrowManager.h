@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <unordered_map>
@@ -14,7 +14,7 @@ public:
 
 	~BorrowManager() {
 		stock.clear();
-		cout << "BorrowManager ¼Ò¸êµÇ¾ú½À´Ï´Ù." << endl;
+		cout << "BorrowManager ì†Œë©¸ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	}
 private:
 	unordered_map<string, int> stock;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <vector>
@@ -13,12 +13,12 @@ public:
 	void DisplayAllBooks();
 	Book GetBookByTitle(string title);
 	// Book GetBookByAuthor(string author);
-	// ÀÛ°¡·Î °Ë»ö ÈÄ Á¦¸ñÀ¸·Î ´ë¿© -> ÀÛ°¡°¡ ¿©·¯°³ÀÇ Ã¥ÀÌ ÀÖÀ»¼ö ÀÖÀ½
+	// ì‘ê°€ë¡œ ê²€ìƒ‰ í›„ ì œëª©ìœ¼ë¡œ ëŒ€ì—¬ -> ì‘ê°€ê°€ ì—¬ëŸ¬ê°œì˜ ì±…ì´ ìˆì„ìˆ˜ ìˆìŒ
 	vector<Book> GetBooks() const { return books; }
 
 	~BookManager() {
 		books.clear();
-		cout << "BookManager ¼Ò¸êµÇ¾ú½À´Ï´Ù." << endl;
+		cout << "BookManager ì†Œë©¸ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	}
 
 private:

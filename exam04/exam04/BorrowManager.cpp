@@ -1,4 +1,4 @@
-#include "BorrowManager.h"
+ï»¿#include "BorrowManager.h"
 #include "Book.h"
 #include <iostream>
 
@@ -7,30 +7,30 @@ using namespace std;
 void BorrowManager::InitializeStock(Book book, int quantity)
 {
 	stock[book.GetTitle()] = quantity;
-	cout << "´ë¿©½Ã½ºÅÛ - [" << book.GetTitle() << "](" << book.GetAuthor() << ")Ã¥" << quantity << "±Ç Ãß°¡µÇ¾ú½À´Ï´Ù." << endl;
+	cout << "ëŒ€ì—¬ì‹œìŠ¤í…œ - [" << book.GetTitle() << "](" << book.GetAuthor() << ")ì±…" << quantity << "ê¶Œ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 }
 
 void BorrowManager::BorrowBook(string title)
 {
 	if (stock[title] < 1) {
-		cout << "Ã¥ [" << title << "]Àº ºô¸± ¼ö ÀÖ´Â Ã¥ÀÌ ¾ø½À´Ï´Ù." << endl;
+		cout << "ì±… [" << title << "]ì€ ë¹Œë¦´ ìˆ˜ ìžˆëŠ” ì±…ì´ ì—†ìŠµë‹ˆë‹¤." << endl;
 	}
 
 	stock[title]--;
-	cout << "Á¤»óÀûÀ¸·Î ´ë¿©Çß½À´Ï´Ù." << endl;
-	cout << "Ã¥ [" << title << "]ÀÇ ´ë¿© °¡´ÉÇÑ ¼ö·®: " << stock[title] << endl;
+	cout << "ì •ìƒì ìœ¼ë¡œ ëŒ€ì—¬í–ˆìŠµë‹ˆë‹¤." << endl;
+	cout << "ì±… [" << title << "]ì˜ ëŒ€ì—¬ ê°€ëŠ¥í•œ ìˆ˜ëŸ‰: " << stock[title] << endl;
 }
 
 void BorrowManager::ReturnBook(string title)
 {
 	stock[title]++;
-	cout << "Á¤»óÀûÀ¸·Î ¹Ý³³µÇ¾ú½À´Ï´Ù." << endl;
-	cout << "Ã¥ [" << title << "]ÀÇ ´ë¿© °¡´ÉÇÑ ¼ö·®: " << stock[title] << endl;
+	cout << "ì •ìƒì ìœ¼ë¡œ ë°˜ë‚©ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
+	cout << "ì±… [" << title << "]ì˜ ëŒ€ì—¬ ê°€ëŠ¥í•œ ìˆ˜ëŸ‰: " << stock[title] << endl;
 }
 
 void BorrowManager::DisplayStock()
 {
-	cout << "¸ðµç Ã¥ÀÇ ´ë¿© °¡´É ¼ö·®À» Ç¥½ÃÇÕ´Ï´Ù." << endl;
+	cout << "ëª¨ë“  ì±…ì˜ ëŒ€ì—¬ ê°€ëŠ¥ ìˆ˜ëŸ‰ì„ í‘œì‹œí•©ë‹ˆë‹¤." << endl;
 	for (auto book : stock) {
 		cout << "[" << book.first << "] : " << book.second << endl;
 	}
