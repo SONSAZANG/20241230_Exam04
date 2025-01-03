@@ -9,8 +9,8 @@ class Book
 public:
 	Book(string title, string author);
 
-	string GetTitle() { return title; }
-	string GetAuthor() { return author; }
+	string getTitle() { return title; }
+	string getAuthor() { return author; }
 
 	~Book() {
 		title = "";

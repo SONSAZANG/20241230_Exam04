@@ -9,11 +9,11 @@ using namespace std;
 struct FindTitle {
 	string title;
 	bool operator()(Book book) {
-		return book.GetTitle() == title;
+		return book.getTitle() == title;
 	}
 };
 
-void BookManager::FindBookByTitle(string title)
+void BookManager::findBookByTitle(string title)
 {
 	FindTitle ft;
 	ft.title = title;
@@ -29,11 +29,11 @@ void BookManager::FindBookByTitle(string title)
 struct FindAuthor {
 	string author;
 	bool operator()(Book book) {
-		return book.GetAuthor() == author;
+		return book.getAuthor() == author;
 	}
 };
 
-void BookManager::FindBookByAuthor(string author)
+void BookManager::findBookByAuthor(string author)
 {
 	FindAuthor ft;
 	ft.author = author;
@@ -44,7 +44,7 @@ void BookManager::FindBookByAuthor(string author)
 		auto it = find_if(copyBooks.begin(), copyBooks.end(), ft);
 		if (it == copyBooks.end()) {
 			for (int i = 0; i < authorBooks.size(); ++i) {
-				cout << "작가의 책 제목: " << authorBooks[i].GetTitle() << endl;
+				cout << "작가의 책 제목: " << authorBooks[i].getTitle() << endl;
 			}
 			break;
 		}
@@ -62,20 +62,20 @@ void BookManager::FindBookByAuthor(string author)
 	cout << author << "작가의 책은 총 " << authorBooks.size() << "권 있습니다." << endl;
 }
 
-void BookManager::AddBook(Book newBook)
+void BookManager::addBook(Book newBook)
 {
 	books.push_back(newBook);
-	cout << "관리자 시스템 - [" << newBook.GetTitle() << "](" << newBook.GetAuthor() << ")책이 생성 되었습니다." << endl;
+	cout << "관리자 시스템 - [" << newBook.getTitle() << "](" << newBook.getAuthor() << ")책이 생성 되었습니다." << endl;
 }
 
-void BookManager::DisplayAllBooks()
+void BookManager::displayAllBooks()
 {
 	for (int i = 0; i < books.size(); ++i) {
-		cout << "책이름: " << books[i].GetTitle() << ", 저자: " << books[i].GetAuthor() << endl;
+		cout << "책이름: " << books[i].getTitle() << ", 저자: " << books[i].getAuthor() << endl;
 	}
 }
 
-Book BookManager::GetBookByTitle(string title)
+Book BookManager::getBookByTitle(string title)
 {
 	FindTitle ft;
 	ft.title = title;

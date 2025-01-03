@@ -8,9 +8,9 @@ using namespace std;
 class BorrowManager {
 public: 
 	void InitializeStock(Book book, int quantity = 3);
-	void BorrowBook(string title);
-	void ReturnBook(string title);
-	void DisplayStock();
+	void borrowBook(string title);
+	void returnBook(string title);
+	void displayStock();
 
 	~BorrowManager() {
 		stock.clear();

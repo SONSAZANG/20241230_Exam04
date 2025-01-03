@@ -17,7 +17,7 @@ enum FUNCTION {
 };
 
 map<string, string> bookList;
-void InitializeBooks() {
+void initializeBooks() {
 	bookList["손사장 이야기"] = "손사장";
 	bookList["손리포터"] = "손사장";
 	bookList["위대한 손사장"] = "손사장";
@@ -25,13 +25,13 @@ void InitializeBooks() {
 	bookList["키보드 연구소"] = "키보드박사";
 }
 
-void PrintTitle() {
+void printTitle() {
 	cout << "---------------------------------------------" << endl;
 	cout << "<--도서관 프로그램 가동!-->" << endl;
 	cout << "---------------------------------------------" << endl;
 }
 
-void PrintLibraryFunction() {
+void printLibraryFunction() {
 	cout << "---------------------------------------------" << endl;
 	cout << "도서관을 이용합니다. 원하시는 기능을 입력하세요." << endl;
 	cout << "1. 책 추가하기" << endl;
@@ -45,19 +45,19 @@ void PrintLibraryFunction() {
 	cout << "---------------------------------------------" << endl;
 }
 
-void SettingLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
+void settingLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 	cout << "도서관에 책을 추가합니다." << endl;
 
 	for (auto it : bookList) {
 		Book newBook = Book(it.first, it.second);
-		bookManager.AddBook(newBook);
+		bookManager.addBook(newBook);
 		borrowManager.InitializeStock(newBook);
 	}
 
 	cout << "5권의 책이 정상적으로 추가되었습니다." << endl;
 }
 
-void OperationLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
+void operationLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 	
 	int inputNum = 0;
 	bool isOperation = true;
@@ -66,7 +66,7 @@ void OperationLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 	while(isOperation == true) {
 		title = "";
 		author = "";
-		PrintLibraryFunction();
+		printLibraryFunction();
 		cin >> inputNum;
 		switch ((FUNCTION)inputNum)
 		{
@@ -74,41 +74,41 @@ void OperationLibrary(BookManager& bookManager, BorrowManager& borrowManager) {
 			cout << "1. 책 추가하기(제목과 작가명을 입력하세요)" << endl;
 			cin >> title >> author;
 			Book newBook = Book(title, author);
-			bookManager.AddBook(newBook);
+			bookManager.addBook(newBook);
 			break;
 		}
 		case FIND_TITLE: {
 			cout << "2. 제목으로 검색하기(제목을 입력하세요)" << endl;
 			cin >> title;
-			bookManager.FindBookByTitle(title);
+			bookManager.findBookByTitle(title);
 			break;
 		}
 		case FIND_AUTHOR: {
 			cout << "3. 작가 이름으로 검색하기(작가명을 입력하세요)" << endl;
 			cin >> author;
-			bookManager.FindBookByAuthor(author);
+			bookManager.findBookByAuthor(author);
 			break;
 		}
 		case DISPLAY_ALL_BOOK_INFO: {
 			cout << "4. 도서관에 있는 모든 책 보기" << endl;
-			bookManager.DisplayAllBooks();
+			bookManager.displayAllBooks();
 			break;
 		}
 		case BORROW_BOOK: {
 			cout << "5. 책 빌리기(제목을 입력하세요)" << endl;
 			cin >> title;
-			borrowManager.BorrowBook(title);
+			borrowManager.borrowBook(title);
 			break;
 		}
 		case RETURN_BOOK: {
 			cout << "6. 책 반납하기(제목을 입력하세요)" << endl;
 			cin >> title;
-			borrowManager.ReturnBook(title);
+			borrowManager.returnBook(title);
 			break;
 		}
 		case DISPLAY_ALL_BORROW_INFO: {
 			cout << "7. 대여 가능한 모든 책 보기" << endl;
-			borrowManager.DisplayStock();
+			borrowManager.displayStock();
 			break;
 		}
 		case SYSTEM_EXIT: {
@@ -127,10 +127,10 @@ int main() {
 	BookManager* bookM = new BookManager();
 	BorrowManager* borrowM = new BorrowManager();
 
-	InitializeBooks();
-	PrintTitle();
-	SettingLibrary(*bookM, *borrowM);
-	OperationLibrary(*bookM, *borrowM);
+	initializeBooks();
+	printTitle();
+	settingLibrary(*bookM, *borrowM);
+	operationLibrary(*bookM, *borrowM);
 
 	delete bookM;
 	delete borrowM;
